@@ -1,17 +1,32 @@
+
+//  Scrumptious APP
 //
-//  ScrumptionAppApp.swift
-//  ScrumptionApp
+//  Created by mohamed ayed
 //
-//  Created by mohamed ayed on 2/25/21.
-//
+
 
 import SwiftUI
 
 @main
 struct ScrumptionAppApp: App {
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    @StateObject var formviewModel = FormRegViewModel()
     var body: some Scene {
+        
         WindowGroup {
-            ContentView()
+            if !formviewModel.IsLoggedIn{
+                AuthView()
+                    .environmentObject(formviewModel)
+                
+            }else{
+                MainView().environmentObject(formviewModel)
+                
+            }
+            
+            
+            
         }
     }
 }
